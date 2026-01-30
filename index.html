@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Surprise for My Baby 🤍</title>
+    <style>
+        /* Safari height fix */
+        :root { --vh: 1vh; }
+        
+        body, html { 
+            margin: 0; padding: 0; 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; 
+        }
+        
+        section { 
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            overflow: hidden;
+        }
+
+        h2 { font-size: 2.2rem; color: #d63384; text-align: center; padding: 20px; z-index: 5; line-height: 1.3; }
+
+        #muteBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #phase1 { background-color: #f8f9fa; }
+        #canvas-container { position: relative; width: 320px; height: 320px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        canvas { position: absolute; top: 0; left: 0; cursor: crosshair; z-index: 2; border-radius: 20px; touch-action: none; }
+        .hidden-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: white; border-radius: 20px; text-align: center; z-index: 1; padding: 20px; box-sizing: border-box; }
+
+        #phase2 { background: linear-gradient(180deg, #ffb3c1 0%, #ff85a1 100%); color: white; height: auto; }
+        .slide { 
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            border-bottom: 2px dashed rgba(255,255,255,0.4); 
+            position: relative;
+        }
+        .slide img, .slide video { 
+            max-width: 85%; 
+            max-height: 55vh; 
+            border: 8px solid white; 
+            border-radius: 10px; 
+            object-fit: cover; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+            margin-bottom: 20px; 
+        }
+
+        #phase3 { background-color: #ffeef8; position: relative; }
+        .choice-title { position: absolute; top: 15%; width: 100%; text-align: center; color: #d63384; padding: 0 10px; box-sizing: border-box; } 
+        
+        button { 
+            padding: 15px 40px; 
+            font-size: 1.3rem; 
+            border-radius: 50px; 
+            border: none; 
+            cursor: pointer; 
+            position: absolute; 
+            transition: transform 0.3s ease, font-size 0.3s ease, left 0.3s ease, top 0.3s ease; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; top: 70%; left: 35%; transform: translate(-50%, -50%); z-index: 10; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); }
+        #noBtn { background-color: #6c757d; color: white; top: 70%; left: 65%; transform: translate(-50%, -50%); z-index: 5; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/love_will_take_you.mp3" type="audio/mpeg">
+    </audio>
+    <div id="muteBtn" onclick="toggleMute()">🔊</div>
+
+    <section id="phase1">
+        <h2>Hello Sayang, what a surprise to see you here 😁</h2>
+        <div id="canvas-container">
+            <div class="hidden-content">
+                <h3 style="color: #ff4d6d;">You guessed it right cutie!</h3>
+                <p>This is my little gift dedicated to you Adelieku, no specific reason 😙</p>
+                <p style="font-size: 0.9rem; color: #888;">Scroll down to see our memories...</p>
+            </div>
+            <canvas id="scratchCanvas" width="320" height="320"></canvas>
+        </div>
+    </section>
+
+    <div id="phase2">
+        <div class="slide">
+            <img src="img/then.jpg" alt="Memory 1">
+            <h2>Where it all began...</h2>
+        </div>
+        <div class="slide">
+            <video loop muted autoplay playsinline>
+                <source src="img/gift_funny1.mp4" type="video/mp4">
+            </video>
+            <h2>Every laugh we shared, sweet memories 🥹 </h2>
+        </div>
+        <div class="slide">
+            <img src="img/funny1.JPG" alt="Memory 3">
+            <h2>The way you make everything warm and bright 🤗</h2>
+        </div>
+        <div class="slide">
+            <img src="img/babychicken.PNG" alt="Memory 4">
+            <h2>Even the quiet moments are my favorite 😴</h2>
+        </div>
+        <div class="slide">
+            <img src="img/brighter.JPG" alt="Memory 5">
+            <h2>I'm so insanely lucky to have you in my life, Cintaku 🫠</h2>
+        </div>
+        <div class="slide">
+            <img src="img/little_cutie.JPG" alt="Memory 6">
+            <h2>Thank you for always showing me your inner child 🤏🏻</h2>
+        </div>
+        <div class="slide">
+            <h2>Now, I have one important question...</h2>
+        </div>
+    </div>
+
+    <section id="phase3">
+        <h1 class="choice-title">Will you be my Valentine Baby? Ples 🥺</h1>
+        <button id="yesBtn">YES!</button>
+        <button id="noBtn">No</button>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // Set VH for Safari
+        const setVh = () => {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        window.addEventListener('resize', setVh);
+        setVh();
+
+        const bgMusic = document.getElementById('bgMusic');
+        let musicStarted = false;
+
+        // SAFARI SPECIAL: Music Unlocker
+        function unlockAudio() {
+            if (!musicStarted) {
+                bgMusic.play().then(() => {
+                    musicStarted = true;
+                }).catch(err => {
+                    console.log("Waiting for user interaction...");
+                });
+            }
+        }
+
+        function toggleMute() {
+            bgMusic.muted = !bgMusic.muted;
+            document.getElementById('muteBtn').innerText = bgMusic.muted ? "🔇" : "🔊";
+        }
+
+        // --- 1. Scratch Logic ---
+        const canvas = document.getElementById('scratchCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ff85a1';
+        ctx.fillRect(0, 0, 320, 320);
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 20px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Scratch me! ✨', 160, 160);
+
+        let isDrawing = false;
+        function scratch(e) {
+            if (!isDrawing) return;
+            unlockAudio(); // Unlocks music on scratch
+
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+            
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 35, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        canvas.addEventListener('mousedown', () => isDrawing = true);
+        window.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mousemove', scratch);
+        
+        canvas.addEventListener('touchstart', (e) => { 
+            isDrawing = true; 
+            unlockAudio(); // Vital for iOS
+            scratch(e);
+            e.preventDefault(); 
+        }, {passive: false});
+        canvas.addEventListener('touchmove', (e) => { 
+            scratch(e); 
+            e.preventDefault(); 
+        }, {passive: false});
+
+        // --- 2. Button Logic ---
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const phase3 = document.getElementById('phase3');
+        
+        let yesScale = 1;
+        let currentLeft = 35; 
+        const targetLeft = 50; 
+
+        const moveNo = () => {
+            unlockAudio(); // Extra trigger just in case
+            const containerWidth = phase3.offsetWidth;
+            const containerHeight = phase3.offsetHeight;
+            const randomX = Math.random() * (containerWidth - 150) + 75;
+            const randomY = Math.random() * (containerHeight - 150) + 75;
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            yesScale += 0.25; 
+            yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
+
+            if (currentLeft < targetLeft) {
+                currentLeft += 2.5; 
+                yesBtn.style.left = currentLeft + '%';
+            }
+        };
+
+        noBtn.addEventListener('mouseover', moveNo);
+        noBtn.addEventListener('touchstart', (e) => {
+            moveNo();
+            e.preventDefault();
+        });
+
+        // --- 3. Success ---
+        yesBtn.onclick = () => {
+            const duration = 10 * 1000;
+            const animationEnd = Date.now() + duration;
+            const interval = setInterval(function() {
+              const timeLeft = animationEnd - Date.now();
+              if (timeLeft <= 0) return clearInterval(interval);
+              confetti({ particleCount: 40, spread: 360, origin: { x: Math.random(), y: Math.random() - 0.2 } });
+            }, 250);
+
+            setTimeout(() => {
+                alert("LESS GOOOOOO, I knew you'd say yes! You are never escaping me xixixi 😈. But seriously sayang, thank you so much for coming into my life, I'm truly grateful for your every impact on my life, how much you changed me in a good way thorough out our already one and a half year, just know that I'm still amazed from how perfect you are honey, I just know that our love will never stop growing ever, we are truly made for each other without a doubt, so once more, I love you more than anything in the existence Queen Adelia pacarku sempurna, my one and only mine sweetie, you are my everything don't you ever forget about that baby 🤍🤍🤍 Happy Valentines Love of My Life, Yours Forever Truly Maxie 💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋");
+            }, 500);
+        };
+    </script>
+</body>
+</html>
